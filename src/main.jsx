@@ -5,4 +5,5 @@ import Solucao from "./Solucao";
 
 const rootElement = document.getElementById("root");
 
-ReactDOM.createRoot(rootElement).render(<Solucao />);
+ReactDOM.createRoot(rootElement).render(<App />);
+// ReactDOM.createRoot(rootElement).render(<Solucao />);

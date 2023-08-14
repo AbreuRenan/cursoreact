@@ -16,7 +16,7 @@ export function Global({ children }) {
   function sendData() {}
   return (
     <globalContext.Provider
-      value={{ data, setData, showStoredData, storeData }}
+      value={{ data, setData, showStoredData, showStoredResponse }}
     >
       {children}
     </globalContext.Provider>

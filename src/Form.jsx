@@ -1,11 +1,9 @@
 import React from "react";
 import Input from "./input";
 
-import { globalContext, Global } from "./GlobalContext";
-
 function Form() {
   console.log("form montou");
-  // const global = React.useContext(globalContext);
+  const [response, setResponse] = React.useState(null);
   const [form, setForm] = React.useState({
     nome: "",
     email: "",
@@ -20,14 +18,16 @@ function Form() {
 
   function submitHandler(event) {
     event.preventDefault();
-    Array.from(event.target)
+    const formObj = Array.from(event.target)
       .filter((el) => {
         if (el.tagName.toLowerCase() === "input") return el;
       })
       .map((input) => {
         const { id, value } = input;
-        setForm({ ...form, [id]: value });
+        return { [id]: value };
       });
+    console.log(formObj);
+    setForm(formObj);
     console.log(form);
 
     // fetch("https://ranekapi.origamid.dev/json/api/usuario", {
@@ -37,7 +37,7 @@ function Form() {
     //   },
     //   body: JSON.stringify(form),
     // }).then((response) => {
-    //   global.storeResponse(response);
+    // setResponse(response);
     // });
   }
   return (

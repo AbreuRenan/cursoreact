@@ -3,11 +3,7 @@ import { Global } from "./GlobalContext";
 import Form from "./Form";
 
 function App() {
-  return (
-    <Global>
-      <Form />
-    </Global>
-  );
+  return <Form />;
 }
 
 export default App;
