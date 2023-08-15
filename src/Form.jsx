@@ -2,7 +2,6 @@ import React from "react";
 import Input from "./input";
 
 function Form() {
-  console.log("form montou");
   const [response, setResponse] = React.useState(null);
   const [form, setForm] = React.useState({
     nome: "",
@@ -19,32 +18,25 @@ function Form() {
   function submitHandler(event) {
     event.preventDefault();
     const formObj = Array.from(event.target)
-      .filter((el) => {
-        if (el.tagName.toLowerCase() === "input") return el;
-      })
-      .map((input) => {
-        const { id, value } = input;
-        return { [id]: value };
-      });
-    console.log(formObj);
+      .filter((el) => el.tagName.toLowerCase() === "input")
+      .reduce((formInputs, currentInputs) => {
+        const { id, value } = currentInputs;
+        return { ...formInputs, [id]: value };
+      }, {});
     setForm(formObj);
-    console.log(form);
-
-    // fetch("https://ranekapi.origamid.dev/json/api/usuario", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(form),
-    // }).then((response) => {
-    // setResponse(response);
-    // });
   }
+
+  function handleClick(evt) {
+    evt.preventDefault();
+    console.log(form);
+  }
+
   return (
     <>
       <h1>Form App {Math.floor(Math.random() * 1000)}</h1>
       <form onSubmit={(e) => submitHandler(e)}>
         <button>Enviar</button>
+        <button onClick={(e) => handleClick(e)}>logForm</button>
         <Input label="Nome" id="nome" type="text" />
         <Input label="Email" id="email" type="email" />
         <Input label="Senha" id="senha" type="password" />
@@ -60,3 +52,13 @@ function Form() {
 }
 
 export default Form;
+
+// fetch("https://ranekapi.origamid.dev/json/api/usuario", {
+//   method: "POST",
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+//   body: JSON.stringify(form),
+// }).then((response) => {
+// setResponse(response);
+// });

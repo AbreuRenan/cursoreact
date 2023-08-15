@@ -1,7 +1,6 @@
 import React from "react";
 
 const App = () => {
-  console.log("app montou");
   const [form, setForm] = React.useState({
     nome: "",
     email: "",
@@ -18,29 +17,28 @@ const App = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // fetch("https://ranekapi.origamid.dev/json/api/usuario", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(form),
-    // }).then((response) => {
-    //   setResponse(response);
-    // });
-    console.log(form);
+    fetch("https://ranekapi.origamid.dev/json/api/usuario", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    }).then((response) => {
+      setResponse(response);
+    });
   }
 
   function handleChange({ target }) {
     const { id, value } = target;
     setForm({ ...form, [id]: value });
   }
-  function log(event) {
-    event.preventDefault();
+  function show(e) {
+    e.preventDefault();
     console.log(form);
   }
   return (
     <form onSubmit={handleSubmit}>
-      <button onClick={log}>Enviar</button>
+      <button onClick={(e) => show(e)}>LOG</button>
       <label htmlFor="nome">Nome</label>
       <input type="text" id="nome" value={form.nome} onChange={handleChange} />
       <label htmlFor="email">Email</label>
